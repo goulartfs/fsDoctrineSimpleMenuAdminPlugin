@@ -1,0 +1,16 @@
+FsMenu:
+  actAs:
+    Timestampable: ~
+  columns:
+    fs_menu_id: { type: integer(11) }
+    type: { type: varchar(255) }
+    label: { type: varchar(255) }
+    label_en: { type: varchar(255) }
+    link: { type: varchar(255) }
+    route: { type: varchar(255) }
+    refer_id: { type: varchar(255) }
+    is_blank: { type: boolean, default: 0 }
+    is_generated_after: { type: boolean, default: 0 }
+    ordem:  { type: integer(11) }
+  relations:
+    FsMenu: { onDelete: CASCADE, onUpdate: CASCADE }

@@ -1,0 +1,81 @@
+#menu-block #list > ul {
+    margin: 0;
+    width: 500px;
+}
+
+#menu-block #list ul {
+    padding: 0;
+}
+
+#menu-block #list li {
+    background: none repeat scroll 0 0 #EFEFEF;
+    border: 1px solid #DCDCDC;
+    border-radius: 4px 4px 4px 4px;
+    list-style: none outside none;
+    margin: 0 0 10px;
+    padding: 10px;
+}
+
+#menu-block #sidebar-menu .block{
+    
+    padding: 0 15px;
+    margin: 10px 0;
+}
+
+#menu-block #sidebar-menu .block:first-child{
+    margin-top: 0;
+}
+
+form fieldset legend{
+    padding-top: 3px;
+}
+
+.edit-block{
+    display: none;
+    margin: 10px 0;
+    border: 1px solid #DCDCDC;
+    background: #fff;
+    padding: 0 10px;
+}
+
+.edit-block > form{
+    margin-bottom: 10px;
+}
+
+.connectedSortable {
+    margin-top: 10px;
+}
+
+.connectedSortable.empty, .ui-sortable-helper{
+    padding: 10px !important;
+    border: 1px dashed goldenrod;
+}
+
+.connectedSortable li:hover > .connectedSortable.empty{
+}
+
+.ui-sortable-helper{
+    
+}
+
+ul{
+    margin-left: 0px;
+}
+
+.title-list{
+    font-weight: bold;
+}
+
+.connectedSortable.ui-sortable{
+    cursor: move;
+}
+
+.icon-arrow-down.pull-right {
+    cursor: pointer;
+}
+
+.type-label {
+    color: #A5A5A5;
+    font-style: italic;
+    margin-right: 5px;
+}

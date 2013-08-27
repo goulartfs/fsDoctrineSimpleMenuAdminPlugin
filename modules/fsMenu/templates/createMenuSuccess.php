@@ -1,0 +1,1 @@
+<?php include_partial('fsMenu/listMenuItem', array('item'=>$item)); ?>
