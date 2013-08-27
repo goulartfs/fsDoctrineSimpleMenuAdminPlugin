@@ -1,52 +1,57 @@
-# sfCkPlugin
+# fsDoctrineSimpleMenuAdminPlugin
 
-The `sfCkPlugin` offers unobtrousive integration for symfony and the js-based WYSIWYG editor CK.
+Esse plugin é para fácil administração de menu utilizando jQueryUi e Bootstrap
 
-## Installation and configuration
+## Instalação e Configuração
 
-### Installation
+### Instalação
 
-Use the default plugin installer procedure
-
-    php symfony plugin:install sfCkPlugin
+Copie o diretório deste plugin para o diretório de plugins do Symfony.
 
 
-### Configuration
+### Configuração
 
-Enable the plugin in your projectConfiguration class:
+Ative o plugin na classe projectConfiguration do projeto0:
 
     public function setup()
     {
-      $this->enablePlugins('sfCkPlugin');
+      $this->enablePlugins('fsDoctrineSimpleMenuAdminPlugin');
     }
 
-publish plugin's assets:
+Caso não esteja utilizando o jqueryUi e/ou bootstrap na publique os assets do plugin, estará disponível na /web os arquivos js e css:
 
     php symfony plugin:publish-assets
 
-add plugin's JS to the application or module you want to use it into.
+Adicione os arquivo js e css do plugin para o funcionamento.
+Para o funcionamento correto é obrigatório a inclusão do menu.admin.js
 
-For example, if I want to use CK for all the teaxtareas of my backend, I'd edit
+Exemplo do código:
 
-    apps/backend/config/view.yml
+    javascripts:    [/fsDoctrineSimpleMenuAdminPlugin/js/menu.admin.js]
 
-with the following code:
+Para adição de listagem de modelos e módulos na administração do menu é necessário adicionar configuração ao app.yml 
+seguindo devidamente os parametros abaixo
 
-    javascripts:    [/sfCkPlugin/js/sfCkPlugin.js]
+app.yml
+--------
 
-Then [download the editor's package](http://ckeditor.com/ "CKEditor website"), put the *ckeditor* folder under:
-
-    web/js/
-
-and enable the editor package where you want to have CKEditor enabled ( for example, the already-discussed view.yml ):
-
-    // apps/backend/config/view.yml
-    javascripts:    [ckeditor/ckeditor,/sfCkPlugin/js/sfCkPlugin.js]
-
-You're done!
-
-### Unobtrousive... and flexible!
-
-If you want to disable the CKeditor in a textarea widget you only need to pass it the *no-editor* class:
-
-    $this->widgetSchema['myTextarea'] = new sfWidgetFormTextarea(array(), array('class' => 'no-editor'));
+all:
+  fsmenu:
+    model:  #blocos geraros a partir de modelos deve pertencer a este array
+      "page":                           #tipo do modelo
+        title: Páginas                  #Título que aparecerá no box de seleção
+        model: Page                     #Model que será buscado a lista de objetos
+        value: getAnchor                #Getter que será utilizado para o value do option e geração da rota
+        option: getTitle                #Getter que será utilizado para printar a label do option
+        route: '@load_page?anchor='     #Rota que será gerado o link ao renderizar o menu
+      "document": 
+        title: Documentos
+        model: Document
+        value: getId
+        option: getLocationType
+        route: '/uploads/'
+        alter_option_label: [Termos e Condições, Política de Privacidade] #[Opcional] Array com label alternativo de option
+        is_generated_after: 1           #[Opcional] True se a geração da rota será realizada no momento em que o menu é renderizado, o valor retornado será o toString da classe
+    module: #blocos gerados a partir de módulos
+      "Biblioteca": { title: Biblioteca, route: "@biblioteca" } #title = Label da option / route = Value da option, rota que será gerada na renderização do menu
+      "Contato": { title: Contato, route: "@contato" }
