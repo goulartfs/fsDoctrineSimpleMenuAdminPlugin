@@ -28,7 +28,10 @@ abstract class PluginFsMenu extends BaseFsMenu {
     }
 
     public function getChild() {
-        return Doctrine::getTable('FsMenu')->findByFsMenuId($this->getId());
+        return Doctrine::getTable('FsMenu')->createQuery('m')
+                ->where('m.fs_menu_id = ?', $this->getId())
+                ->orderBy('m.ordem asc')
+                ->execute();
     }
 
     public function getUrlFor() {
